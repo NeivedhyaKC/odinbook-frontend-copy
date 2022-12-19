@@ -6,6 +6,7 @@ import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility,VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GoogleIcon from '@mui/icons-material/Google';
 
 const LoginPage = () =>
 {
@@ -41,6 +42,8 @@ const LoginPage = () =>
 
         const response = await fetch("http://localhost:5000/login",{
             method: 'POST',
+            credentials: 'include',
+            withCredentials:true,
             headers:
             {
                 'Content-Type':'application/json'
@@ -48,10 +51,9 @@ const LoginPage = () =>
             body: JSON.stringify(data)
         });
         const responseData = await response.json();
-        if(responseData.token)
+        if(responseData.user /*response.token*/)
         {
-            sessionStorage.setItem('token',responseData.token);
-            sessionStorage.setItem('user',responseData.user);
+            sessionStorage.setItem("user",JSON.stringify(responseData.user));
             navigate("/users");
         }
         else
@@ -66,6 +68,28 @@ const LoginPage = () =>
             }
             setEmail("");
             setValues({password:"", showPassword:false})
+        }
+    }
+
+    const OnSignInWithGoogleClick = async () =>
+    {
+        const newWindow = window.open("http://localhost:5000/auth/google","_blank", "width=500,height=600");
+        if(newWindow)
+        {
+            const timerId = setInterval(async () => 
+            {
+                if(newWindow.closed)
+                {
+                    if(timerId)
+                    {
+                        clearInterval(timerId);
+                    }
+                    const response = await fetch("http://localhost:5000/users/authUser", {credentials: "include"});
+                    const responseData = await response.json();
+                    sessionStorage.setItem("user",JSON.stringify(responseData.user));
+                    navigate("/users");
+                }
+            },500);
         }
     }
 
@@ -120,6 +144,15 @@ const LoginPage = () =>
                         marginTop: 2,
                         }}>Login</Button>
                 </form>
+
+                <Button variant="contained" size="large" color='muiblue' startIcon={<GoogleIcon/>}
+                    sx={{
+                        width:300,
+                    }}
+                    onClick={()=>{ OnSignInWithGoogleClick()}}
+                    >
+                    Sign in with Google
+                </Button>
             </div>
         </div>
     )
