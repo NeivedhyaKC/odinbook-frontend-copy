@@ -7,6 +7,7 @@ import { Visibility,VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GoogleIcon from '@mui/icons-material/Google';
+import GoogleButton from 'react-google-button'
 
 const LoginPage = () =>
 {
@@ -138,21 +139,13 @@ const LoginPage = () =>
                     />
 
                     <Button type="submit" variant="contained" size="large" sx={{
-                        width: 200,
+                        width: 245,
                         paddingTop:1.5,
                         paddingBottom:1.5,
                         marginTop: 2,
                         }}>Login</Button>
                 </form>
-
-                <Button variant="contained" size="large" color='muiblue' startIcon={<GoogleIcon/>}
-                    sx={{
-                        width:300,
-                    }}
-                    onClick={()=>{ OnSignInWithGoogleClick()}}
-                    >
-                    Sign in with Google
-                </Button>
+                <GoogleButton onClick={() => OnSignInWithGoogleClick()}/>
             </div>
         </div>
     )
