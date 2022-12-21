@@ -6,8 +6,8 @@ import { InputAdornment, IconButton } from "@mui/material";
 import { Visibility,VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GoogleIcon from '@mui/icons-material/Google';
 import GoogleButton from 'react-google-button'
+import SignUpModal from "./SignUpModal";
 
 const LoginPage = () =>
 {
@@ -21,6 +21,8 @@ const LoginPage = () =>
         password:"",
         showPassword:false
     });
+    let [showSignUpModal,setShowSignUpModal] = useState(false);
+    
 
     const handleChange = (prop) => (event) => {
      setValues({ ...values, [prop]: event.target.value });
@@ -96,6 +98,9 @@ const LoginPage = () =>
 
     return (
         <div id="loginPage">
+            {
+                showSignUpModal ? <SignUpModal setShowSignUpModal = {setShowSignUpModal}/> : null 
+            }
             <div id="shareSpaceContainer">
                 <div>
                     <p id="shareSpace">ShareSpace</p>
@@ -121,6 +126,7 @@ const LoginPage = () =>
                     type={values.showPassword ? "text" : "password"} // <-- This is where the magic happens
                     onChange={handleChange('password')}
                     sx={{width:350}}
+                    required
                     error={errMsg.passwordErrMsg.length>0}
                     helperText={errMsg.passwordErrMsg}
                     InputProps={{ // <-- This is where the toggle button is added.
@@ -139,13 +145,27 @@ const LoginPage = () =>
                     />
 
                     <Button type="submit" variant="contained" size="large" sx={{
-                        width: 245,
+                        width: 350,
                         paddingTop:1.5,
                         paddingBottom:1.5,
                         marginTop: 2,
+                        borderRadius:4
                         }}>Login</Button>
                 </form>
-                <GoogleButton onClick={() => OnSignInWithGoogleClick()}/>
+                <div id="signUpContainer">
+                    <Button variant="contained" sx={{
+                        width:350,
+                        paddingTop:1.5,
+                        paddingBottom:1.5,
+                        borderRadius:4
+                    }}
+                    onClick={() =>setShowSignUpModal(true)}>
+                        Sign Up
+                    </Button>
+                    <p id="or">or</p>
+                    <GoogleButton onClick={() => OnSignInWithGoogleClick()}/>
+                </div>
+                
             </div>
         </div>
     )

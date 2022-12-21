@@ -2,13 +2,15 @@
 {
   --primary: #A975FF;
   --secondary:#434E71;
-  --tertiary:#A4B7DF;
+  --tertiary:#C4C4C4;
 }
 
 body {
   margin: 0;
-  font-family: 'PT Sans Caption',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: "Roboto",
+  /* 'PT Sans Caption','Segoe UI', */
+  /* -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', */
+    /* 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', */
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

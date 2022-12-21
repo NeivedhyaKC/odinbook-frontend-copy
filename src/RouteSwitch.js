@@ -20,7 +20,7 @@ const RouteSwitch = () =>
             },
             tertiary:
             {
-                main:"#A4B7DF"
+                main:"#C4C4C4"
             },
             muiblue:
             {

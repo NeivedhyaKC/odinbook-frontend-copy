@@ -9,6 +9,7 @@ const MainLayout =()=>
         {
             const response = await fetch("http://localhost:5000/users",{credentials:"include"});
             const responseData = await response.json();
+            console.log(responseData);
         }
         fetchData();
     },[])
