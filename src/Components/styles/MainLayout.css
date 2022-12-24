@@ -1,0 +1,156 @@
+#mainLayout
+{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+#appbarMenuOverlay
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 800;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 400ms ease 0s;
+    visibility: hidden;
+}
+#appbarMenuOverlay.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+#menu
+{
+    transition: width 300ms ease 0s;
+    background-color: rgb(253, 253, 253);
+    height: 100vh;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+#menu::-webkit-scrollbar 
+{
+    display: none;  /* Safari and Chrome */
+}
+
+#menuShareSpace
+{
+    color: var(--primary);
+    font-size: 3vw;
+    /* text-align: center; */
+    padding-left: 10%;
+    margin: 30px 0px;
+    font-weight:500;
+}
+#menuHeading, #accountHeading
+{
+    color: var(--secondary);
+    margin: 0;
+    padding-left: 30px;
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+#menuSearchField,#menuFriends,#menuFriendRequests,#menuLogout
+{
+    display: none;
+}
+
+#accountHeading
+{
+    margin-bottom: 20px;
+}
+#mainDiv
+{
+    background-color: #F1F7FE;
+    height: 100vh;
+    flex:2.4;
+}
+
+#sideDiv
+{
+    background-color: #F1F7FE;
+    height: 100vh;
+    flex:1;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    box-sizing: border-box;
+}
+#sideDivChild
+{
+    border-left: 2px solid #e2e2e2;
+    height:100%
+}
+
+#searchFieldAndLogoutContainer
+{
+    display: flex;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    gap: 8px;
+    justify-content: space-evenly;
+}
+
+
+.friendsContainer
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+}
+.friendsContainer :nth-child(1)
+{
+    color: var(--secondary);
+    font-size: 1.1em;
+}
+.friendsContainer :nth-child(2)
+{
+    color: var(--primary);
+    font-size: 0.9em;
+    font-weight: 500;
+    padding-right: 5px;
+}
+
+@media screen and (max-width:1050px)
+{
+    #sideDiv
+    {
+        display:none;
+    }
+    #menuSearchField,#menuFriends,#menuFriendRequests,#menuLogout
+    {
+        display: inline-flex;
+    }
+}
+
+@media screen and (max-width:725px)
+{
+    #menu
+    {
+        position: fixed;
+        /* visibility: hidden; */
+        width: 0;
+    }
+
+    #menu.active
+    {
+        /* visibility: visible; */
+        width: 70%;
+        z-index: 801;
+    }
+    #menuShareSpace
+    {
+        font-size: 2em;
+    }
+}

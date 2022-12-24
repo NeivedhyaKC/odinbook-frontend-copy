@@ -91,6 +91,17 @@ const SignUpModal =(props) =>
             sessionStorage.setItem("user",JSON.stringify(responseData.user));
             navigate("/users");
         }
+        else
+        {
+            if(responseData.info.err === -1)
+            {
+                let tempErrMsgs = {
+                    emailErrMsg : "A user with this email already exists"
+                }
+                setErrMsgs(tempErrMsgs);
+            }
+            return;
+        }
         clearModal();
         props.setShowSignUpModal(false);
     }
@@ -128,6 +139,8 @@ const SignUpModal =(props) =>
                         }} variant="outlined" type="email" 
                         id="email" label="Email" size="large"
                         value={email} onChange={e => setEmail(e.target.value)}
+                        error={errMsgs.emailErrMsg? errMsgs.emailErrMsg.length > 0 :false}
+                        helperText={errMsgs.emailErrMsg}
                         required
                         />
 

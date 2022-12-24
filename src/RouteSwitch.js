@@ -3,6 +3,7 @@ import LoginSuccess from "./Components/LoginSuccess";
 import App from "./App";
 import MainLayout from "./Components/MainLayout";
 import { createTheme, ThemeProvider } from "@mui/material";
+import HomePage from "./Components/HomePage";
 const { BrowserRouter, Routes, Route } = require("react-router-dom")
 
 const RouteSwitch = () =>
@@ -35,7 +36,9 @@ const RouteSwitch = () =>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<App/>}/>
-                    <Route path="/users" element={<MainLayout/>}/>
+                    <Route element={<MainLayout/>}>
+                        <Route path="/home" element={<HomePage/>}/>
+                    </Route>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/login/success" element={<LoginSuccess/>}/>
                 </Routes>

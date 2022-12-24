@@ -1,0 +1,60 @@
+#appbar
+{
+    display: none;
+}
+
+#appbarShareSpace
+{
+    margin-left: 33%;
+    color: var(--primary);
+    font-size: 1.4em;
+}
+
+#appbarMenuOverlay
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 800;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 400ms ease 0s;
+    visibility: hidden;
+}
+#appbarMenuOverlay.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+#appbarMenu
+{
+    position: fixed;
+    z-index: 801;
+    height: 100vh;
+    top: 0;
+    width: 65%;
+    left: 0;
+    background-color: white;
+}
+@media screen and (max-width:725px)
+{
+    #appbar
+    {
+        display:flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 60px;
+        z-index: 50;
+        background-color: white;
+        box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 10px 0px;
+        padding: 0 10px;
+        align-items: center;
+    }
+}
+        

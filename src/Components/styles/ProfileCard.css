@@ -1,0 +1,34 @@
+
+.profileCardContainer p
+{
+    margin: 0;
+}
+
+.profileCardContainer div:nth-child(2)
+{
+    flex:1;
+}
+.profileCardPic
+{
+    padding: 2px;
+    object-fit: contain;
+    width: 20%;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+}
+.profileCardName
+{
+    color: var(--secondary);
+    padding-left: 8%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.profileCardSubname
+{
+    color: var(--tertiary);
+    padding-left: 8%;
+    font-size: 0.9em;
+    overflow: hidden;
+    padding-top: 2%;
+}

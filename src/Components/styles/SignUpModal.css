@@ -7,6 +7,7 @@
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
+    backdrop-filter: blur(4px);
 }
 
 #signUpModal
@@ -23,6 +24,7 @@
     position: fixed;
     background-color: white;
     transform: translate(-50%,-50%);
+    border-radius: 15px;
 }
 
 #signUpModal p:first-child

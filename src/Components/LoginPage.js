@@ -57,7 +57,7 @@ const LoginPage = () =>
         if(responseData.user /*response.token*/)
         {
             sessionStorage.setItem("user",JSON.stringify(responseData.user));
-            navigate("/users");
+            navigate("/home");
         }
         else
         {
@@ -90,7 +90,7 @@ const LoginPage = () =>
                     const response = await fetch("http://localhost:5000/users/authUser", {credentials: "include"});
                     const responseData = await response.json();
                     sessionStorage.setItem("user",JSON.stringify(responseData.user));
-                    navigate("/users");
+                    navigate("/home");
                 }
             },500);
         }
