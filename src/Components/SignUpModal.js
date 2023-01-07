@@ -68,11 +68,10 @@ const SignUpModal =(props) =>
         }
 
         const user = {
-            first_name: firstName,
-            last_name:lastName,
+            firstName: firstName,
+            lastName:lastName,
             email:email,
-            password:password,
-            gender:"Male"
+            password:password
         };
         const response = await fetch(process.env.REACT_APP_API_URL + "/users",{
             method: 'POST',
@@ -89,7 +88,7 @@ const SignUpModal =(props) =>
         if(responseData.user /*response.token*/)
         {
             sessionStorage.setItem("user",JSON.stringify(responseData.user));
-            navigate("/users");
+            navigate("/home");
         }
         else
         {
@@ -181,7 +180,8 @@ const SignUpModal =(props) =>
                         paddingTop:1.5,
                         paddingBottom:1.5,
                         marginTop: 2,
-                        borderRadius:4
+                        borderRadius:4,
+                        textTransform:"none"
                         }}
                         >Sign Up</Button>
                 </form>

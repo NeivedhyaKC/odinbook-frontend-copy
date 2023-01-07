@@ -46,7 +46,7 @@ const MainLayout =()=>
     {
         async function fetchData()
         {
-            const response = await fetch("http://localhost:5000/users",{credentials:"include"});
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/users`,{credentials:"include"});
             const responseData = await response.json();
             console.log(responseData);
         }
@@ -155,7 +155,7 @@ const MainLayout =()=>
                     >Friend Requests</MenuButton>
                 </div>
                 <p id="accountHeading">Account</p>
-                <ProfileCard id="accountMenu" first_name="John" last_name="Conner"/>
+                <ProfileCard id="accountMenu" firstName="John" lastName="Conner"/>
                 <MenuButton variant="text" color="secondary" id="menuLogout"
                     startIcon={<LogoutIcon color="primary" onClick={()=> CloseAppBarMenu()}
                     sx={{
@@ -191,19 +191,27 @@ const MainLayout =()=>
                         </Fab>
 
                     </div>
+                    <div id="friendsWithProfileCardContainer">
 
-                    <div className="friendsContainer">
-                        <p>Friends</p>
-                        <p>See All</p>
+                        <div className="friendsContainer">
+                            <p>Friends</p>
+                            <Button variant="text"
+                            sx={{
+                                textTransform:"none"
+                            }}>See All</Button>
+                        </div>
+                        <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%"/>
+                        <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%"/>
+                        <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%"/>
                     </div>
-                    <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%"/>
-                    <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%"/>
-                    <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%"/>
                     
                     
                     <div className="friendsContainer">
                         <p>Friend Requests</p>
-                        <p>See All</p>
+                        <Button variant="text"
+                        sx={{
+                            textTransform:"none"
+                        }}>See All</Button>
                     </div>
                     <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%" withAcceptButton={true}/>
                     <ProfileCard paddingLeft="5%" paddingBottom = "6px" profileCardPicWidth="17%" withAcceptButton={true}/>

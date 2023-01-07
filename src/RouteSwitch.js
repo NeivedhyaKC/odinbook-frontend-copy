@@ -27,6 +27,10 @@ const RouteSwitch = () =>
             {
                 main:"#1976d2",
                 contrastText: "#ffffff"
+            },
+            red:
+            {
+                main:"#F73463"
             }
         }
     })

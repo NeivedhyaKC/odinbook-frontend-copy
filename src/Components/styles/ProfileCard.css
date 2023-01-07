@@ -32,3 +32,8 @@
     overflow: hidden;
     padding-top: 2%;
 }
+.profileCardComment
+{
+    color: var(--secondary);
+    padding-left: 2%;
+}

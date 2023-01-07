@@ -1,0 +1,77 @@
+.postCard
+{
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: height 300ms ease 0ms;
+}
+
+.postContent
+{
+    margin: 0;
+    margin-top: 10px;
+    margin-left: 8px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    border-top: 2px solid #e2e2e2;
+}
+.postImage
+{
+    object-fit: cover;
+    width: 100%;
+    border-radius: 15px;
+}
+.postFeedback
+{
+    margin: 0;
+    margin-top: 15px;
+    margin-left: 8px;
+    margin-bottom: 5px;
+    padding-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid #e2e2e2;
+}
+
+.noOfComments, .noOfLikes
+{
+    color: var(--tertiary);
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+}
+
+.commentCard
+{
+    background-color:#e2e2e2;
+    margin: -10px;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+}
+.commentCardChild
+{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+}
+#commentField
+{
+    margin-top: 10px;
+    height: 105px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+#commentFieldButtons
+{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

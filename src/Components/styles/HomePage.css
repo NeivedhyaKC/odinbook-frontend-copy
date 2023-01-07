@@ -1,0 +1,19 @@
+
+
+#WhatsOnYourMind
+{
+    margin: 20px;
+    height: 155px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+#WhatsOnYourMindButtons
+{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    gap: 10px;
+}

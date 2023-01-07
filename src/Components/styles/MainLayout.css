@@ -75,6 +75,13 @@
     background-color: #F1F7FE;
     height: 100vh;
     flex:2.4;
+    overflow: auto;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+#mainDiv::-webkit-scrollbar 
+{
+    display: none;  /* Safari and Chrome */
 }
 
 #sideDiv
@@ -113,6 +120,7 @@
 {
     color: var(--secondary);
     font-size: 1.1em;
+    font-weight: 600;
 }
 .friendsContainer :nth-child(2)
 {
@@ -120,6 +128,10 @@
     font-size: 0.9em;
     font-weight: 500;
     padding-right: 5px;
+}
+#friendsWithProfileCardContainer
+{
+    height: 270px;
 }
 
 @media screen and (max-width:1050px)
@@ -152,5 +164,9 @@
     #menuShareSpace
     {
         font-size: 2em;
+    }
+    #mainDiv
+    {
+        margin-top: 62px;
     }
 }
