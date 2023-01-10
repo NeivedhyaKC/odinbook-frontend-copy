@@ -11,19 +11,20 @@ const HomePage = () =>
 
     const user =JSON.parse(sessionStorage.getItem("user"));
 
+    async function fetchFeedData()
+    {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts`,
+        {
+            method:'GET',
+            credentials: 'include',
+            withCredentials:true
+        });
+        const responseData = await response.json();
+        setFeed(responseData);
+    }
+
     useEffect(() => 
     {
-        async function fetchFeedData()
-        {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts`,
-            {
-                method:'GET',
-                credentials: 'include',
-                withCredentials:true
-            });
-            const responseData = await response.json();
-            setFeed(responseData);
-        }
         fetchFeedData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
@@ -40,7 +41,7 @@ const HomePage = () =>
         formData.append("userId",user._id);
         formData.append("content",postContent);
         formData.append("postedAt",new Date().toISOString());
-        formData.append("likes",0);
+        formData.append("likes",[]);
         formData.append("comments",[]);
         // formData.append("post",post);
         await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts`,{
@@ -58,6 +59,7 @@ const HomePage = () =>
         });
         const responseData = await response.json();
         setFeed(responseData);
+        setPostContent("");
     }
 
     return (
@@ -88,7 +90,7 @@ const HomePage = () =>
             {
                 feed.map((post) =>
                 {
-                    return <PostCard key={post._id} post ={post}/>
+                    return <PostCard key={post._id} post ={post} fetchFeedData = {fetchFeedData}/>
                 })
             }
 

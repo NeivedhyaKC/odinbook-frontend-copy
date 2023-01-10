@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import GoogleButton from 'react-google-button'
 import SignUpModal from "./SignUpModal";
 
+
 const LoginPage = () =>
 {
     let navigate = useNavigate();
@@ -43,7 +44,7 @@ const LoginPage = () =>
         event.preventDefault();
         const data = {email:email,password:values.password};
 
-        const response = await fetch("http://localhost:5000/login",{
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`,{
             method: 'POST',
             credentials: 'include',
             withCredentials:true,

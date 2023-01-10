@@ -32,6 +32,12 @@
     overflow: hidden;
     padding-top: 2%;
 }
+
+.postedAt
+{
+    color: var(--tertiary);
+    font-size: 0.8em;
+}
 .profileCardComment
 {
     color: var(--secondary);
