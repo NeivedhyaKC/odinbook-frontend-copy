@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import "./styles/MainLayout.css";
 import { Button} from "@mui/material";
@@ -9,13 +9,12 @@ import PersonIcon from '@mui/icons-material/Person';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ProfileCard from "./ProfileCard";
 import SearchIcon from '@mui/icons-material/Search';
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Fab from '@mui/material/Fab';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Appbar from "./Appbar";
+import ListModal from "./ListModal";
 
 const MainLayout =()=>
 {
@@ -38,6 +37,8 @@ const MainLayout =()=>
         },
 
     })
+
+    const [showListModal,setShowListModal] = useState(false);
 
     const menuElement = useRef();
     const appbarMenuOverlayElement = useRef();
@@ -71,100 +72,103 @@ const MainLayout =()=>
     return (
         <div id="mainLayout">
             <Appbar onAppBarMenuButtonClick={onAppBarMenuButtonClick}/>   
+            <ListModal showListModal={showListModal} setShowListModal ={setShowListModal}/>
             <div id="appbarMenuOverlay" ref={appbarMenuOverlayElement} onClick={()=> CloseAppBarMenu()}></div>
             <div id="menu" ref={menuElement}>
-                <p id="menuShareSpace">ShareSpace</p>
-                <p id="menuHeading">Menu</p>
-                <div onClick={()=> CloseAppBarMenu()}>
-                    <TextField id="menuSearchField" placeholder="Search" variant="outlined"
-                            InputProps={{
-                                startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon color="primary"/>
-                                </InputAdornment>
-                                ),
-                            }}
-                            sx={{
-                                padding:1,
-                                display:"none",
-                                "@media screen and (max-width:1050px)":
-                                {
-                                    "display":"block"
-                                }
-                            }}></TextField>
+                <div id="menuChild">
+                    <p id="menuShareSpace">ShareSpace</p>
+                    <p id="menuHeading">Menu</p>
+                    <div onClick={()=> CloseAppBarMenu()}>
+                        <MenuButton variant="text" id="menuSearchField"
+                        sx={{
+                            display:"none",
+                            "@media screen and (max-width:1050px)":
+                            {
+                                "display":"block"
+                            },
+                        }}
+                        startIcon={<SearchIcon
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        onClick ={() => setShowListModal(true)}
+                        >Search</MenuButton>
 
-                    <MenuButton variant="text"
-                    startIcon={<HomeIcon
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    onClick={() => console.log("hello")}
-                    >Home</MenuButton>
+                        <MenuButton variant="text"
+                        startIcon={<HomeIcon
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Home</MenuButton>
 
-                    <MenuButton variant="text" color="secondary"
-                    startIcon={<PersonIcon color="primary"
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    >Profile</MenuButton>
+                        <MenuButton variant="text" color="secondary"
+                        startIcon={<PersonIcon color="primary"
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Profile</MenuButton>
 
-                    <MenuButton variant="text" color="secondary"
-                    startIcon={<ChatBubbleIcon color="primary"
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    >Messages</MenuButton>
-                    
-                    <MenuButton variant="text" color="secondary"
-                    startIcon={<BookmarkIcon color="primary"
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    >Saved Posts</MenuButton>
+                        <MenuButton variant="text" color="secondary"
+                        startIcon={<ChatBubbleIcon color="primary"
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Messages</MenuButton>
+                        
+                        <MenuButton variant="text" color="secondary"
+                        startIcon={<BookmarkIcon color="primary"
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Saved Posts</MenuButton>
 
-                    <MenuButton variant="text" color="secondary" id="menuFriends"
-                    startIcon={<GroupIcon color="primary"
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    >Friends</MenuButton>
+                        <MenuButton variant="text" color="secondary" id="menuFriends"
+                        startIcon={<GroupIcon color="primary"
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Friends</MenuButton>
 
-                    <MenuButton variant="text" color="secondary" id="menuFriendRequests"
-                    startIcon={<PersonAddIcon color="primary"
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    >Friend Requests</MenuButton>
+                        <MenuButton variant="text" color="secondary" id="menuFriendRequests"
+                        startIcon={<PersonAddIcon color="primary"
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Friend Requests</MenuButton>
+                    </div>
+                    <p id="accountHeading">Account</p>
+                    <ProfileCard id="accountMenu" firstName="John" lastName="Conner"/>
+                    <MenuButton variant="text" color="secondary" id="menuLogout"
+                        startIcon={<LogoutIcon color="primary" onClick={()=> CloseAppBarMenu()}
+                        sx={{
+                            width:30,
+                            height:30,
+                            paddingRight:2,
+                            color:"#A975FF"
+                        }}/>} fullWidth
+                        >Logout</MenuButton>
                 </div>
-                <p id="accountHeading">Account</p>
-                <ProfileCard id="accountMenu" firstName="John" lastName="Conner"/>
-                <MenuButton variant="text" color="secondary" id="menuLogout"
-                    startIcon={<LogoutIcon color="primary" onClick={()=> CloseAppBarMenu()}
-                    sx={{
-                        width:30,
-                        height:30,
-                        paddingRight:2,
-                        color:"#A975FF"
-                    }}/>} fullWidth
-                    >Logout</MenuButton>
             </div>
             <div id="mainDiv">
                 <Outlet/>
@@ -174,19 +178,19 @@ const MainLayout =()=>
             <div id="sideDiv">
                 <div id="sideDivChild">
                     <div id="searchFieldAndLogoutContainer">
-                        <TextField id="searchField" placeholder="Search" variant="outlined"
-                        InputProps={{
-                            startAdornment: (
-                            <InputAdornment position="start">
-                                <SearchIcon color="primary"/>
-                            </InputAdornment>
-                            ),
-                        }}
+                        <Button id="searchField" variant="outlined" startIcon={<SearchIcon color="primary"/>}
                         sx={{
                             width:"65%",
-                        }}></TextField>
+                            textTransform:"none",
+                            justifyContent:"flex-start",
+                            fontSize:17
+                        }}
+                        onClick={() => setShowListModal(true)}>Search</Button>
 
-                        <Fab color="primary">
+                        <Fab color="primary"
+                        sx={{
+                            zIndex:0
+                        }}>
                             <LogoutIcon/>
                         </Fab>
 

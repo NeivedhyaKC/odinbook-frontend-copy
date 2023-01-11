@@ -19,11 +19,6 @@
     transition: opacity 400ms ease 0s;
     visibility: hidden;
 }
-#appbarMenuOverlay.active
-{
-    opacity: 1;
-    visibility: visible;
-}
 #menu
 {
     transition: width 300ms ease 0s;
@@ -32,13 +27,7 @@
     flex:1;
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-}
-#menu::-webkit-scrollbar 
-{
-    display: none;  /* Safari and Chrome */
+    overflow:scroll;
 }
 
 #menuShareSpace
@@ -154,11 +143,16 @@
         /* visibility: hidden; */
         width: 0;
     }
+    #appbarMenuOverlay.active
+    {
+        opacity: 1;
+        visibility: visible;
+    }
 
     #menu.active
     {
         /* visibility: visible; */
-        width: 70%;
+        width: 300px;
         z-index: 801;
     }
     #menuShareSpace

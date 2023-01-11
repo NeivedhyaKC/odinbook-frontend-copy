@@ -1,0 +1,44 @@
+#listModalOverlay
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 800;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 280ms ease 0s;
+    visibility: hidden;
+}
+#listModal
+{
+    transition: opacity 280ms ease 0s;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    width: 550px;
+    height: 550px;
+    z-index: 1000;
+    position: fixed;
+    background-color: #F1F7FE;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+    opacity: 0;
+    visibility: hidden;
+}
+#listModalOverlay.active, #listModal.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+#SearchTextFieldContainer
+{
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius:15px;
+    border-bottom: 2px solid var(--tertiary);
+}

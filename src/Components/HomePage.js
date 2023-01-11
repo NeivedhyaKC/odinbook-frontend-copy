@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import { Button} from "@mui/material";
 import PostCard from "./PostCard";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/system";
 
 const HomePage = () =>
 {
@@ -66,12 +67,15 @@ const HomePage = () =>
         <div id="homePage">
             {/* <img src={`${process.env.REACT_APP_API_URL}/users/${user._id}/posts/1/image`} alt="testimage"/> */}
             <form id="WhatsOnYourMind" encType="multipart/form-data" onSubmit={handlePostSubmit}>
-                <TextField variant="standard" multiline placeholder="What's on your mind?"
-                rows={4}
-                sx={{
-                    width:'100%'
-                }}
-                value={postContent} onChange={e => setPostContent(e.target.value)} required/>
+                <Box>
+                    <TextField variant="standard" multiline placeholder="What's on your mind?"
+                    rows={4}
+                    sx={{
+                        width:'100%'
+                    }}
+                    value={postContent} onChange={e => setPostContent(e.target.value)} required/>
+                </Box>
+                
                 <div id="WhatsOnYourMindButtons">
                     <Button variant="contained" color="primary" component="label"
                     sx={{
