@@ -122,6 +122,10 @@
 {
     height: 270px;
 }
+#noFriendRequests
+{
+    text-align: center;
+}
 
 @media screen and (max-width:1050px)
 {

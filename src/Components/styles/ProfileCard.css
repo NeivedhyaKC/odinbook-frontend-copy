@@ -43,3 +43,7 @@
     color: var(--secondary);
     padding-left: 2%;
 }
+a{
+    color: inherit;
+    text-decoration: none;
+}

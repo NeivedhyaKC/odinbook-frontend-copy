@@ -9,12 +9,13 @@ const HomePage = () =>
 {
     let [postContent,setPostContent] = useState("");
     let [feed, setFeed] = useState([]);
+    let [uploadButtonText,setUploadButtonText] = useState("Upload");
 
     const user =JSON.parse(sessionStorage.getItem("user"));
 
     async function fetchFeedData()
     {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts`,
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts/friendsPosts`,
         {
             method:'GET',
             credentials: 'include',
@@ -81,8 +82,8 @@ const HomePage = () =>
                     sx={{
                         textTransform:"none"
                     }}>
-                        Upload
-                        <input hidden accept="image/*" type="file" id="postImage"/>
+                        {uploadButtonText}
+                        <input hidden accept="image/*" type="file" id="postImage" onChange={(e) =>{setUploadButtonText(e.target.value.substring(12))}}/>
                     </Button>
 
                     <Button type="submit" variant="contained" color="primary"

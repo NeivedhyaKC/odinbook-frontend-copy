@@ -4,6 +4,8 @@ import App from "./App";
 import MainLayout from "./Components/MainLayout";
 import { createTheme, ThemeProvider } from "@mui/material";
 import HomePage from "./Components/HomePage";
+import ProfilePage from "./Components/ProfilePage";
+import SavedPosts from "./Components/SavedPosts";
 const { BrowserRouter, Routes, Route } = require("react-router-dom")
 
 const RouteSwitch = () =>
@@ -54,6 +56,9 @@ const RouteSwitch = () =>
                     <Route path="/" element={<App/>}/>
                     <Route element={<MainLayout/>}>
                         <Route path="/home" element={<HomePage/>}/>
+                        <Route path="/profile" element={<ProfilePage/>}/>
+                        <Route path="/savedPosts" element={<SavedPosts/>}/>
+
                     </Route>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/login/success" element={<LoginSuccess/>}/>

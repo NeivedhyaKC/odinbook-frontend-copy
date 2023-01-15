@@ -95,11 +95,14 @@ const PostCard = (props) =>
             <ProfileCard profileCardPicWidth="8%" paddingLeft="2%" profileCardNamePaddingLeft="2%"
             profileCardSubnamePaddingLeft="2%" profileCardSubnamePaddingTop ="1%" profileCardNameFontSize={20}
             postedAt={props.post.postedAt} firstName={props.post.userId.firstName}
-            lastName={props.post.userId.lastName} postId={props.post._id} fetchFeedData ={props.fetchFeedData}
+            lastName={props.post.userId.lastName} postId={props.post._id} fetchFeedData ={props.fetchFeedData} userId={props.post.userId._id}
             withDeleteButton/>
             <p className="postContent">{props.post.content}</p>
-            <img src={`${process.env.REACT_APP_API_URL}/users/${props.post.userId._id}/posts/${props.post._id}/image`}
-                alt="postImage" className="postImage"/>
+            {
+                props.post.photoUrl?<img src={`${process.env.REACT_APP_API_URL}/users/${props.post.userId._id}/posts/${props.post._id}/image`}
+                alt="postImage" className="postImage"/> : null
+            }
+            
             <div className="postFeedback">
                 <Button color={likeColor?"red":"tertiary"} onClick={() => onLikeButtonClick()}
                 sx={{
