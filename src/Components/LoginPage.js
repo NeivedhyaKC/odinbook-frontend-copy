@@ -97,6 +97,28 @@ const LoginPage = () =>
         }
     }
 
+    const signInAsExampleUser = async () =>
+    {
+        const data = {email:"ExampleUser@mail.com",password:"ExampleUser@mail.com"};
+
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`,{
+            method: 'POST',
+            credentials: 'include',
+            withCredentials:true,
+            headers:
+            {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+        if(responseData.user /*response.token*/)
+        {
+            sessionStorage.setItem("user",JSON.stringify(responseData.user));
+            navigate("/home");
+        }
+    }
+
     return (
         <div id="loginPage">
             {
@@ -147,7 +169,7 @@ const LoginPage = () =>
 
                     <Button type="submit" variant="contained" size="large" sx={{
                         width: 350,
-                        paddingTop:1.5,
+                        paddingTop:1.2,
                         paddingBottom:1.5,
                         marginTop: 2,
                         borderRadius:4
@@ -156,7 +178,7 @@ const LoginPage = () =>
                 <div id="signUpContainer">
                     <Button variant="contained" sx={{
                         width:350,
-                        paddingTop:1.5,
+                        paddingTop:1.3,
                         paddingBottom:1.5,
                         borderRadius:4
                     }}
@@ -165,6 +187,16 @@ const LoginPage = () =>
                     </Button>
                     <p id="or">or</p>
                     <GoogleButton onClick={() => OnSignInWithGoogleClick()}/>
+                    <Button variant="contained" sx={{
+                        width:350,
+                        paddingTop:1.3,
+                        paddingBottom:1.5,
+                        marginTop:2,
+                        borderRadius:4
+                    }}
+                    onClick={() =>signInAsExampleUser()}>
+                        Log in as Example User
+                    </Button>
                 </div>
                 
             </div>

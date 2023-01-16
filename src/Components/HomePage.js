@@ -53,7 +53,7 @@ const HomePage = () =>
             body: formData
         })
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts`,
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/posts/friendsPosts`,
         {
             method:'GET',
             credentials: 'include',

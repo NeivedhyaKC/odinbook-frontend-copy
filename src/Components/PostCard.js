@@ -137,7 +137,7 @@ const PostCard = (props) =>
                                 return <ProfileCard profileCardPicWidth="7%" profileCardSubnamePaddingTop="1%"
                                 profileCardSubnamePaddingLeft="2%" profileCardNamePaddingLeft="2%"
                                 paddingLeft="1%" borderBottom="2px solid #e2e2e2" paddingBottom="8px"
-                                borderRadius="15px 15px 0 0 "
+                                borderRadius="15px 15px 0 0 " userId={commentFromCommentsArray.userId._id}
                                 comment={commentFromCommentsArray.comment} firstName={commentFromCommentsArray.userId.firstName}
                                 lastName={commentFromCommentsArray.userId.lastName} key={uuidv4()}/>
                             }) : null

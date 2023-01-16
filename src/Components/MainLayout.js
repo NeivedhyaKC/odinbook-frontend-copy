@@ -58,6 +58,7 @@ const MainLayout =()=>
     {
         setListModalList2(user.friendRequests);
         setListModalList3(user.friends);
+        fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -65,6 +66,10 @@ const MainLayout =()=>
     {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/users`,{credentials:"include"});
         const responseData = await response.json();
+        if(responseData.msg === "You must login first")
+        {
+            navigate("/login");
+        }
         return responseData;
     }
 
@@ -96,6 +101,21 @@ const MainLayout =()=>
     {
         setShowListModal3(true);
         setListModalList3(user.friends);
+    }
+
+    const onLogoutButtonClick = async () =>
+    {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/logout`,
+        {
+            method: 'POST',
+            credentials: 'include',
+            withCredentials:true,
+        });
+        const responseData = await response.json();
+        if(responseData.msg === "Logged out successfully")
+        {
+            navigate("/login");
+        }
     }
 
     if(sessionStorage.getItem("user") === null)
@@ -199,7 +219,7 @@ const MainLayout =()=>
                     <p id="accountHeading">Account</p>
                     <ProfileCard id="accountMenu" firstName={user.firstName} lastName={user.lastName} userId={user._id} photoUrl={user.photoUrl? 
                         user.photoUrl:undefined}/>
-                    <MenuButton variant="text" color="secondary" id="menuLogout"
+                    <MenuButton variant="text" color="secondary" id="menuLogout" onClick ={() => onLogoutButtonClick()}
                         startIcon={<LogoutIcon color="primary" onClick={()=> CloseAppBarMenu()}
                         sx={{
                             width:30,
@@ -227,11 +247,11 @@ const MainLayout =()=>
                         }}
                         onClick={() => onSearchButtonClick()}>Search</Button>
 
-                        <Fab color="primary"
+                        <Fab color="primary" onClick={() => onLogoutButtonClick()}
                         sx={{
                             zIndex:0
                         }}>
-                            <LogoutIcon/>
+                            <LogoutIcon />
                         </Fab>
 
                     </div>
