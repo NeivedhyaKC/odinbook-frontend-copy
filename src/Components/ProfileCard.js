@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 
 const { DateTime } = require("luxon");
@@ -13,8 +13,23 @@ const { DateTime } = require("luxon");
 
 const ProfileCard = (props) =>
 {
+    const oldUser =JSON.parse(sessionStorage.getItem("user"));
+
     const [anchorEl,setAnchorEl] = useState(null);
+    let [postSaved,setPostSaved] = useState(false);
     const open = Boolean(anchorEl);
+    
+    useEffect(() =>
+    {
+        for(let post of oldUser.savedPosts)
+        {
+            if(post._id === props.postId)
+            {
+                setPostSaved(true);
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     const profileCardContainer = {
         display: "flex",
@@ -54,8 +69,6 @@ const ProfileCard = (props) =>
         paddingLeft: props.profileCardSubnamePaddingLeft? props.profileCardSubnamePaddingLeft:"8%",
         paddingTop: props.profileCardSubnamePaddingTop? props.profileCardSubnamePaddingTop:"2%"
     }
-
-    const oldUser =JSON.parse(sessionStorage.getItem("user"));
 
     const onDeleteButtonClick = async () =>
     {
@@ -104,6 +117,47 @@ const ProfileCard = (props) =>
         props.setFriendRequestsList(responseData.user.friendRequests);
         user.friendRequests = responseData.user.friendRequests;
         sessionStorage.setItem("user",JSON.stringify(user));
+    }
+    const onSaveButtonClick = async (savePost) =>
+    {
+        setAnchorEl(null);
+        const user =JSON.parse(sessionStorage.getItem("user"));
+        let data;
+
+        if(savePost)
+        {
+            data = {operation: "add"};
+        }
+        else
+        {
+            data = {operation: "remove"};
+        }
+
+        let response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/${props.postId}/savePost`,
+        {
+            method:'PUT',
+            credentials: 'include',
+            withCredentials:true,
+            headers:
+            {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+
+        if(props.fetchFeedData)
+        {
+            props.fetchFeedData();
+        }
+        setPostSaved(false);
+        for(let post of responseData.user.savedPosts)
+        {
+            if(post._id === props.postId)
+            {
+                setPostSaved(true);
+            }
+        }
     }
 
     return (
@@ -178,7 +232,11 @@ const ProfileCard = (props) =>
                         oldUser._id === props.userId?
                         <MenuItem onClick={() => onDeleteButtonClick()}>Delete</MenuItem> : null
                     }
-                    <MenuItem onClick={() => setAnchorEl(null)}>Save</MenuItem>
+                    {
+                        postSaved?
+                        <MenuItem onClick={() => onSaveButtonClick(false)}>Unsave</MenuItem>:
+                        <MenuItem onClick={() => onSaveButtonClick(true)}>Save</MenuItem>
+                    }
                 </Menu>
                 </div>
                  : null

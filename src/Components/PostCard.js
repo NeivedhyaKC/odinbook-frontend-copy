@@ -62,7 +62,7 @@ const PostCard = (props) =>
 
         setLikes(responseData.post.likes.length);
     }
-
+    
     const onCommentButtonClick =() =>
     {
         setShowCommentCard(!showCommentCard);
