@@ -77,7 +77,7 @@ const LoginPage = () =>
 
     const OnSignInWithGoogleClick = async () =>
     {
-        const newWindow = window.open("http://localhost:5000/auth/google","_blank", "width=500,height=600");
+        const newWindow = window.open(`${process.env.REACT_APP_API_URL}/auth/google`,"_blank", "width=500,height=600");
         if(newWindow)
         {
             const timerId = setInterval(async () => 
@@ -88,7 +88,7 @@ const LoginPage = () =>
                     {
                         clearInterval(timerId);
                     }
-                    const response = await fetch("http://localhost:5000/users/authUser", {credentials: "include"});
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/authUser`, {credentials: "include"});
                     const responseData = await response.json();
                     sessionStorage.setItem("user",JSON.stringify(responseData.user));
                     navigate("/home");

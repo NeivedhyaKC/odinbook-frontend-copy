@@ -93,10 +93,11 @@ const HomePage = () =>
                 </div>
             </form>
             {
+                feed?
                 feed.map((post) =>
                 {
                     return <PostCard key={post._id} post ={post} fetchFeedData = {fetchFeedData}/>
-                })
+                }):null
             }
 
         </div>
