@@ -2,11 +2,16 @@
 {
     display: none;
 }
+#menuFab
+{
+    position: absolute;
+}
 
 #appbarShareSpace
 {
-    margin-left: 33%;
+    text-align: center;
     color: var(--primary);
+    width: 100%;
     font-size: 1.4em;
 }
 @media screen and (max-width:725px)

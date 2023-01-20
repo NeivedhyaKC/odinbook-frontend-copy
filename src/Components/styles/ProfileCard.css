@@ -4,10 +4,6 @@
     margin: 0;
 }
 
-.profileCardContainer div:nth-child(2)
-{
-    flex:1;
-}
 .profileCardPic
 {
     padding: 2px;
@@ -15,6 +11,7 @@
     width: 20%;
     border-radius: 50%;
     border: 3px solid var(--primary);
+    flex-shrink: 0;
 }
 .profileCardName
 {
@@ -22,6 +19,12 @@
     padding-left: 8%;
     overflow: hidden;
     white-space: nowrap;
+}
+.profileCardNameContainer
+{
+    flex:1;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .profileCardSubname

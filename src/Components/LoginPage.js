@@ -192,7 +192,8 @@ const LoginPage = () =>
                         paddingTop:1.3,
                         paddingBottom:1.5,
                         marginTop:2,
-                        borderRadius:4
+                        borderRadius:4,
+                        marginBottom:2
                     }}
                     onClick={() =>signInAsExampleUser()}>
                         Log in as Example User

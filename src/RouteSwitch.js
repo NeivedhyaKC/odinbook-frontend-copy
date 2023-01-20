@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import HomePage from "./Components/HomePage";
 import ProfilePage from "./Components/ProfilePage";
 import SavedPosts from "./Components/SavedPosts";
-const { BrowserRouter, Routes, Route } = require("react-router-dom")
+const {  Routes, Route, HashRouter } = require("react-router-dom")
 
 const RouteSwitch = () =>
 {
@@ -49,10 +49,9 @@ const RouteSwitch = () =>
           }
     })
 
-
     return (
         <ThemeProvider theme={theme}>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <HashRouter>
                 <Routes>
                     <Route path="/" element={<App/>}/>
                     <Route element={<MainLayout/>}>
@@ -64,7 +63,7 @@ const RouteSwitch = () =>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/login/success" element={<LoginSuccess/>}/>
                 </Routes>
-            </BrowserRouter>  
+            </HashRouter>  
         </ThemeProvider>
         
     )

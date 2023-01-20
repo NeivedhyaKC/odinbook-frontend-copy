@@ -92,7 +92,7 @@ const PostCard = (props) =>
     }
     return (
         <div className="postCard">
-            <ProfileCard profileCardPicWidth="8%" paddingLeft="2%" profileCardNamePaddingLeft="2%"
+            <ProfileCard profileCardPicWidth="max(8%,40px)" paddingLeft="2%" profileCardNamePaddingLeft="2%"
             profileCardSubnamePaddingLeft="2%" profileCardSubnamePaddingTop ="1%" profileCardNameFontSize={20}
             postedAt={props.post.postedAt} firstName={props.post.userId.firstName}
             lastName={props.post.userId.lastName} postId={props.post._id} fetchFeedData ={props.fetchFeedData} userId={props.post.userId._id}

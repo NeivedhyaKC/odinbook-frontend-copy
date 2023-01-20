@@ -88,11 +88,11 @@
     #subheading
     {
         text-align: center;
-        width: 100%;
+        width: 97%;
     }
     #shareSpace
     {
-        font-size: 6vw;
+        font-size: max(6vw,3em);
         text-align: center;
     }
     #loginBox

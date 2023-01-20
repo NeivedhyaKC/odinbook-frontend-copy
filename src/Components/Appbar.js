@@ -7,7 +7,7 @@ const Appbar =(props) =>
 
     return (
         <div id="appbar">
-            <Fab color="primary" size="small"
+            <Fab color="primary" size="small" id="menuFab"
             sx={{
                 zIndex:0
             }} onClick={() => props.onAppBarMenuButtonClick()}>

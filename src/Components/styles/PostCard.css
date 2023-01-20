@@ -75,3 +75,11 @@
     justify-content: flex-end;
     margin-top: 10px;
 }
+
+@media screen and (max-width:450px) 
+{
+    .postCard
+    {
+        margin: 15px 10px;
+    }    
+}

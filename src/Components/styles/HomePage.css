@@ -17,3 +17,10 @@
     margin-top: 10px;
     gap: 10px;
 }
+@media screen and (max-width:450px) 
+{
+    #WhatsOnYourMind
+    {
+        margin: 15px 10px;
+    }    
+}
