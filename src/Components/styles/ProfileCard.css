@@ -39,7 +39,7 @@
 .postedAt
 {
     color: var(--tertiary);
-    font-size: 0.8em;
+    font-size: min(3vw,0.8em);
 }
 .profileCardComment
 {
