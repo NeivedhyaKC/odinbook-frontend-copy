@@ -23,6 +23,9 @@ const LoginPage = () =>
         showPassword:false
     });
     let [showSignUpModal,setShowSignUpModal] = useState(false);
+    let [loading,setLoading] = useState(false);
+    let [loginAsExampleUserText, setLoginAsExampleUserText] = useState("Login as Example User");
+    let [loginText,setLoginText] = useState("Login");
     
 
     const handleChange = (prop) => (event) => {
@@ -41,10 +44,16 @@ const LoginPage = () =>
     };
     const handleSubmit = async (event) =>
     {
+        if(loading)
+        {
+            return;
+        }
+        setLoading(true);
+        setLoginText("Loading... might take a minute");
         event.preventDefault();
         const data = {email:email,password:values.password};
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`,{
+        fetch(`${process.env.REACT_APP_API_URL}/login`,{
             method: 'POST',
             credentials: 'include',
             withCredentials:true,
@@ -53,26 +62,32 @@ const LoginPage = () =>
                 'Content-Type':'application/json'
             },
             body: JSON.stringify(data)
-        });
-        const responseData = await response.json();
-        if(responseData.user /*response.token*/)
+        })
+        .then(response => response.json())
+        .then((responseData) =>
         {
-            sessionStorage.setItem("user",JSON.stringify(responseData.user));
-            navigate("/home");
-        }
-        else
-        {
-            if(responseData.info.err === -1)
+            setLoading("false");
+            setLoginText("Login");
+            if(responseData.user /*response.token*/)
             {
-                setErrMsg({emailErrMsg:responseData.info.msg,passwordErrMsg:''});
+                sessionStorage.setItem("user",JSON.stringify(responseData.user));
+                navigate("/home");
             }
-            else if(responseData.info.err === -2)
+            else
             {
-                setErrMsg({passwordErrMsg:responseData.info.msg,emailErrMsg:''});
+                if(responseData.info.err === -1)
+                {
+                    setErrMsg({emailErrMsg:responseData.info.msg,passwordErrMsg:''});
+                }
+                else if(responseData.info.err === -2)
+                {
+                    setErrMsg({passwordErrMsg:responseData.info.msg,emailErrMsg:''});
+                }
+                setEmail("");
+                setValues({password:"", showPassword:false})
             }
-            setEmail("");
-            setValues({password:"", showPassword:false})
-        }
+        })
+        
     }
 
     const OnSignInWithGoogleClick = async () =>
@@ -99,9 +114,15 @@ const LoginPage = () =>
 
     const signInAsExampleUser = async () =>
     {
+        if(loading)
+        {
+            return;
+        }
+        setLoading(true);
+        setLoginAsExampleUserText("Loading... might take a minute")
         const data = {email:"ExampleUser@mail.com",password:"ExampleUser@mail.com"};
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`,{
+        fetch(`${process.env.REACT_APP_API_URL}/login`,{
             method: 'POST',
             credentials: 'include',
             withCredentials:true,
@@ -110,13 +131,18 @@ const LoginPage = () =>
                 'Content-Type':'application/json'
             },
             body: JSON.stringify(data)
-        });
-        const responseData = await response.json();
-        if(responseData.user /*response.token*/)
+        })
+        .then((response) => response.json())
+        .then((responseData) =>
         {
-            sessionStorage.setItem("user",JSON.stringify(responseData.user));
-            navigate("/home");
-        }
+            if(responseData.user /*response.token*/)
+            {
+                sessionStorage.setItem("user",JSON.stringify(responseData.user));
+                navigate("/home");
+                setLoading(false);
+                setLoginAsExampleUserText("Login as Example User");
+            }
+        });
     }
 
     return (
@@ -173,7 +199,7 @@ const LoginPage = () =>
                         paddingBottom:1.5,
                         marginTop: 2,
                         borderRadius:4
-                        }}>Login</Button>
+                        }}>{loginText}</Button>
                 </form>
                 <div id="signUpContainer">
                     <Button variant="contained" sx={{
@@ -193,10 +219,11 @@ const LoginPage = () =>
                         paddingBottom:1.5,
                         marginTop:2,
                         borderRadius:4,
-                        marginBottom:2
+                        marginBottom:2,
+                        textTransform:"none"
                     }}
-                    onClick={() =>signInAsExampleUser()}>
-                        Log in as Example User
+                    onClick={() =>signInAsExampleUser()} id="loginAsExampleUser">
+                        {loginAsExampleUserText}
                     </Button>
                 </div>
                 

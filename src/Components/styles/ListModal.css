@@ -1,57 +1,52 @@
-#listModalOverlay
-{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 800;
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity 280ms ease 0s;
-    visibility: hidden;
+#listModalOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 800;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 280ms ease 0s;
+  visibility: hidden;
 }
-#listModal
-{
-    transition: opacity 280ms ease 0s;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    width: min(600px,80%);
-    height: min(600px,80%);
-    z-index: 1000;
-    position: fixed;
-    background-color: #F1F7FE;
-    transform: translate(-50%,-50%);
-    border-radius: 15px;
-    opacity: 0;
-    visibility: hidden;
+#listModal {
+  transition: opacity 280ms ease 0s;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  width: min(600px, 80%);
+  height: min(600px, 80%);
+  z-index: 1000;
+  position: fixed;
+  background-color: #f1f7fe;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  opacity: 0;
+  visibility: hidden;
 }
-#listModalOverlay.active, #listModal.active
-{
-    opacity: 1;
-    visibility: visible;
+#listModalOverlay.active,
+#listModal.active {
+  opacity: 1;
+  visibility: visible;
 }
-#SearchTextFieldContainer
-{
-    background-color: white;
-    border-top-left-radius: 15px;
-    border-top-right-radius:15px;
-    border-bottom: 2px solid var(--tertiary);
+#SearchTextFieldContainer {
+  background-color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: 2px solid var(--tertiary);
 }
-#listModalList
-{
-    padding: 2%;
-    overflow: scroll;
+#listModalList {
+  padding: 2%;
+  overflow: scroll;
 }
-#listModalResults
-{
-    color: var(--secondary);
-    font-size: 1.1em;
-    font-weight: 600;
-    padding-left: 20px;
-    margin-bottom: 3px;
+#listModalResults {
+  color: var(--secondary);
+  font-size: 1.1em;
+  font-weight: 600;
+  padding-left: 20px;
+  margin-bottom: 3px;
 }
