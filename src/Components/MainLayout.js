@@ -15,6 +15,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Appbar from "./Appbar";
 import ListModal from "./ListModal";
+import ChatPageSideDiv from "./ChatPageSideDiv";
 import { useNavigate } from "react-router-dom";
 
 const MainLayout = () => {
@@ -25,7 +26,7 @@ const MainLayout = () => {
     fontSize: 15,
     paddingBottom: 12,
     paddingTop: 12,
-    color: "#BDBDBD",
+    color: "var(--secondary)",
     "&:hover": {
       color: "#434E71",
       boxShadow: "0px 0.3px 13px #dfdfdf, 0px -0.3px 13px #dfdfdf",
@@ -49,6 +50,8 @@ const MainLayout = () => {
   const [showFriendsContainer1, setShowFriendsContainer1] = useState(false);
   const [showFriendsContainer2, setShowFriendsContainer2] = useState(false);
 
+  const [inChatPage, setInChatPage] = useState(false);
+
   const menuElement = useRef();
   const appbarMenuOverlayElement = useRef();
 
@@ -61,7 +64,7 @@ const MainLayout = () => {
 
     const timeoutId = setTimeout(() => {
       setShowFriendsContainer2(true);
-    }, 500);
+    }, 300);
 
     // Cleanup the timeout to avoid memory leaks
     return () => clearTimeout(timeoutId);
@@ -194,7 +197,10 @@ const MainLayout = () => {
                 />
               }
               fullWidth
-              onClick={() => navigate("/home")}
+              onClick={() => {
+                setInChatPage(false);
+                navigate("/home")
+              }}
             >
               Home
             </MenuButton>
@@ -214,9 +220,10 @@ const MainLayout = () => {
                 />
               }
               fullWidth
-              onClick={() =>
+              onClick={() => {
+                setInChatPage(false);
                 navigate("/profile", { state: { userId: user._id } })
-              }
+              }}
             >
               Profile
             </MenuButton>
@@ -235,9 +242,13 @@ const MainLayout = () => {
                   }}
                 />
               }
+              onClick={() => {
+                setInChatPage(true);
+                navigate("/chat", { state: { userId: user._id } });
+              }}
               fullWidth
             >
-              Messages
+              Chat
             </MenuButton>
 
             <MenuButton
@@ -255,7 +266,10 @@ const MainLayout = () => {
                 />
               }
               fullWidth
-              onClick={() => navigate("/savedPosts")}
+              onClick={() => {
+                setInChatPage(false);
+                navigate("/savedPosts")
+              }}
             >
               Saved Posts
             </MenuButton>
@@ -338,7 +352,9 @@ const MainLayout = () => {
       </div>
 
       <div id="sideDiv">
-        <div id="sideDivChild">
+        {
+          inChatPage ? <ChatPageSideDiv /> :
+          <div id="sideDivChild">
           <div id="searchFieldAndLogoutContainer">
             <Button
               id="searchField"
@@ -450,7 +466,9 @@ const MainLayout = () => {
               <p id="noFriendRequests">No friend requests.</p>
             ) : null}
           </div>
-        </div>
+          </div>
+        }
+        
       </div>
     </div>
   );
