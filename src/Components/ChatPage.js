@@ -64,7 +64,7 @@ const ChatPage = () => {
       withCredentials: true,
     });
 
-    socket.on("chat message", (msg) => {
+    socket.on("chat message", (msg) => { 
       console.log("Received message:", msg);
     });
 
