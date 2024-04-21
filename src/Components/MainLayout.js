@@ -17,6 +17,9 @@ import Appbar from "./Appbar";
 import ListModal from "./ListModal";
 import ChatPageSideDiv from "./ChatPageSideDiv";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import Store from "../Stores/Store";
 
 const MainLayout = () => {
   const MenuButton = styled(Button)({
@@ -50,10 +53,11 @@ const MainLayout = () => {
   const [showFriendsContainer1, setShowFriendsContainer1] = useState(false);
   const [showFriendsContainer2, setShowFriendsContainer2] = useState(false);
 
-  const [inChatPage, setInChatPage] = useState(false);
 
   const menuElement = useRef();
   const appbarMenuOverlayElement = useRef();
+
+  const location = useLocation();
 
   useEffect(() => {
     setListModalList2(user.friendRequests);
@@ -127,7 +131,8 @@ const MainLayout = () => {
   }
   return (
     <div id="mainLayout">
-      <Appbar onAppBarMenuButtonClick={onAppBarMenuButtonClick} />
+      <Provider store={Store}>
+<Appbar onAppBarMenuButtonClick={onAppBarMenuButtonClick} />
       <ListModal
         showListModal={showListModal}
         setShowListModal={setShowListModal}
@@ -198,7 +203,6 @@ const MainLayout = () => {
               }
               fullWidth
               onClick={() => {
-                setInChatPage(false);
                 navigate("/home")
               }}
             >
@@ -221,7 +225,6 @@ const MainLayout = () => {
               }
               fullWidth
               onClick={() => {
-                setInChatPage(false);
                 navigate("/profile", { state: { userId: user._id } })
               }}
             >
@@ -243,7 +246,6 @@ const MainLayout = () => {
                 />
               }
               onClick={() => {
-                setInChatPage(true);
                 navigate("/chat", { state: { userId: user._id } });
               }}
               fullWidth
@@ -267,7 +269,6 @@ const MainLayout = () => {
               }
               fullWidth
               onClick={() => {
-                setInChatPage(false);
                 navigate("/savedPosts")
               }}
             >
@@ -353,7 +354,7 @@ const MainLayout = () => {
 
       <div id="sideDiv">
         {
-          inChatPage ? <ChatPageSideDiv /> :
+          location.pathname === "/chat" ? <ChatPageSideDiv /> :
           <div id="sideDivChild">
           <div id="searchFieldAndLogoutContainer">
             <Button
@@ -470,6 +471,7 @@ const MainLayout = () => {
         }
         
       </div>
+      </Provider>
     </div>
   );
 };

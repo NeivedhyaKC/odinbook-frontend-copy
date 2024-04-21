@@ -93,6 +93,16 @@ const ListModal = (props) =>
                                 setFriendRequestsList={props.setFriendRequestsList} setFriendsList={props.setFriendsList}/>
                         }):null
                     }
+                    {
+                        props.withChat?
+                        listModalList.map((el) =>
+                        {
+                            return <ProfileCard paddingLeft="3%" paddingBottom = "4px" profileCardPicWidth="12%" borderTop="2px solid var(--tertiary)"
+                                marginBottom="2px" paddingTop="4px" profileCardSubnamePaddingLeft="4%" profileCardNamePaddingLeft="4%"
+                                key ={el._id} firstName={el.firstName} lastName={el.lastName} userId={el._id} withChatButton
+                                />
+                        }):null
+                    }
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
+import Store from "../Stores/Store";
+import { chatAdded } from "../Stores/MyChatsSlice";
 
 const { DateTime } = require("luxon");
 
@@ -33,6 +35,8 @@ const ProfileCard = (props) =>
 
     const profileCardContainer = {
         display: "flex",
+        width: props.profileCardContainerWidth ? props.profileCardContainerWidth : "",
+        height : props.profileCardContainerHeight ? props.profileCardContainerHeight : "",
         paddingLeft: props.paddingLeft? props.paddingLeft : "10%",
         paddingBottom:props.paddingBottom?props.paddingBottom:0,
         alignItems:"center",
@@ -104,6 +108,25 @@ const ProfileCard = (props) =>
         sessionStorage.setItem("user",JSON.stringify(user));
     }
 
+    const onChatButtonClick = async () =>
+    {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const data = { userId: props.userId };
+        let response = await fetch(`${process.env.REACT_APP_API_URL}/users/${user._id}/chats/`,
+        {
+            method:'POST',
+            credentials: 'include',
+            withCredentials: true,
+            headers:
+            {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        let responseData = await response.json();
+        Store.dispatch(chatAdded({ chatAdded: responseData }));
+    }
+
     const onRejectButtonClick = async () =>
     {
         const user =JSON.parse(sessionStorage.getItem("user"));
@@ -173,7 +196,7 @@ const ProfileCard = (props) =>
             }
             <div className="profileCardNameContainer">
                 <p className="profileCardName" style={profileCardName}>
-                    <Link to="/profile" state={{userId:props.userId}}>
+                    <Link to={props.disableLink ? "#" :"/profile"} state={{userId:props.userId}}>
                         {`${props.firstName} ${props.lastName}`}</Link>
                     {
                         props.postedAt? <span className="postedAt">  posted on  
@@ -186,7 +209,7 @@ const ProfileCard = (props) =>
                     props.firstNameOnly?null:
                     !props.comment?<p className="profileCardSubname" style={profileCardSubname}>
                         {`@${props.firstName}`}</p> : 
-                        <p className="profileCardComment"> {props.comment}</p>
+                        <p className="profileCardComment" style={{height : props.commentHeight? props.commentHeight : ""}}> {props.comment}</p>
                 }
             </div>
 
@@ -212,6 +235,17 @@ const ProfileCard = (props) =>
                     marginRight:2,
                     marginLeft:1
                 }}>Accept</Button> : null
+            }
+            {
+                props.withChatButton ? <Button variant="contained" color="primary" onClick={()=> onChatButtonClick()}
+                sx={{
+                    padding:0,
+                    height:30,
+                    fontSize:13,
+                    textTransform:"none",
+                    marginRight:2,
+                    marginLeft:1
+                }}>Chat</Button> : null
             }
 
             {
